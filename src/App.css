@@ -1,10 +1,50 @@
+@font-face {
+    font-family: "Dash Horizon";
+    src: url("fonts/DashHorizon.eot");
+    src:
+        url("fonts/DashHorizon.eot") format("embedded-opentype"),
+        url("fonts/DashHorizon.woff2") format("woff2"),
+        url("fonts/DashHorizon.woff") format("woff"),
+        url("fonts/DashHorizon.ttf") format("truetype");
+}
+body {
+    --s: 25px; /* control the size*/
+    --c1: #ffffff;
+    --c2: #8fb1bc;
+
+    --c: var(--c1) 25%, #0000 0;
+
+    --_s: /calc(6 * var(--s)) calc(6 * var(--s));
+    --g1: var(--_s) conic-gradient(from 45deg at calc(250% / 3), var(--c));
+    --g2: var(--_s) conic-gradient(from 135deg at 50% calc(250% / 3), var(--c));
+    --g3: var(--_s) conic-gradient(from 225deg at calc(50% / 3), var(--c));
+    --g4: var(--_s) conic-gradient(from -45deg at 50% calc(50% / 3), var(--c));
+    background:
+        calc(2 * var(--s)) calc(5 * var(--s)) var(--g4),
+        calc(5 * var(--s)) calc(2 * var(--s)) var(--g4),
+        0 calc(4 * var(--s)) var(--g3),
+        calc(3 * var(--s)) var(--s) var(--g3),
+        calc(2 * var(--s)) calc(3 * var(--s)) var(--g2),
+        calc(5 * var(--s)) 0 var(--g2),
+        var(--s) var(--s) var(--g1),
+        calc(4 * var(--s)) calc(4 * var(--s)) var(--g1),
+        conic-gradient(at calc(100% / 3) calc(200% / 3), var(--c)) 0 0 /
+            calc(3 * var(--s)) calc(3 * var(--s)) var(--c2);
+}
 #root {
     max-width: 1280px;
-    margin: 0 auto;
+    margin: 40px auto;
     padding: 2rem;
     text-align: center;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 24px;
 }
-
+h1 {
+    font-style: italic;
+    font-size: 5rem;
+    font-family: "Dash Horizon", sans-serif;
+}
 .card {
     padding: 2em;
     font-size: 2rem;
@@ -14,7 +54,7 @@ input {
     width: 3ch;
     padding: 4px;
 }
-.ninja-star {
+/*.ninja-star {
     display: inline-block;
     width: 80px;
     aspect-ratio: 1;
@@ -30,8 +70,8 @@ input {
         64.14% 35.86%
     );
     -webkit-mask: radial-gradient(circle 5px, #0000 90%, #000);
-    /*animation: l1 5s infinite linear;*/
-}
+    animation: l1 5s infinite linear;
+}*/
 /*@keyframes l1 {
     100% {
         transform: rotate(1turn);

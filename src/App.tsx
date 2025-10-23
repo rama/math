@@ -29,6 +29,9 @@ function App() {
   }
   return (
     <>
+      <div className="ninja-star"></div>
+      <div className="ninja-star"></div>
+      <div className="ninja-star"></div>
       <h1>Fact Attack!</h1>
       <form className="card" onSubmit={checkAnswer}>
         <label>

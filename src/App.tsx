@@ -2,28 +2,46 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [answer, setAnswer] = useState("?");
+  const [answer, setAnswer] = useState("");
   const [num1, setNum1] = useState(Math.floor(Math.random() * 10));
   const [num2, setNum2] = useState(Math.floor(Math.random() * 10));
-  const [correct, setCorrect] = useState(false);
+  const [streak, setStreak] = useState(0);
   function handleChange(e) {
-    setAnswer(e.target.value);
-  }
-  function checkAnswer(e) {
-    if (answer == num1 + num2) {
-      setCorrect(true);
+    const value = e.target.value;
+    if (value === "" || /^\d+$/.test(value)) {
+      setAnswer(value);
     }
+  }
+  const generateNewQuestion = () => {
+    setNum1(Math.floor(Math.random() * 10));
+    setNum2(Math.floor(Math.random() * 10));
+    setAnswer("");
+  };
+  function checkAnswer(e) {
+    e.preventDefault();
+    const userAnswer = parseInt(answer, 10);
+    if (userAnswer == num1 + num2) {
+      setStreak(streak + 1);
+    } else {
+      setStreak(0);
+    }
+    generateNewQuestion();
   }
   return (
     <>
-      <h1>Math Up</h1>
+      <h1>Fact Attack!</h1>
       <form className="card" onSubmit={checkAnswer}>
         <label>
           {num1} + {num2} ={" "}
-          <input type="text" value={answer} onChange={handleChange} />
+          <input
+            inputMode="numeric"
+            value={answer}
+            onChange={handleChange}
+            placeholder="?"
+          />
         </label>
       </form>
-      {correct && <p>Correct!</p>}
+      <p>Streak: {streak}</p>
     </>
   );
 }

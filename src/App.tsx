@@ -6,7 +6,7 @@ function App() {
   const [num1, setNum1] = useState(Math.floor(Math.random() * 10));
   const [num2, setNum2] = useState(Math.floor(Math.random() * 10));
   const [streak, setStreak] = useState(0);
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     if (value === "" || /^\d+$/.test(value)) {
       setAnswer(value);
@@ -17,7 +17,7 @@ function App() {
     setNum2(Math.floor(Math.random() * 10));
     setAnswer("");
   };
-  function checkAnswer(e) {
+  function checkAnswer(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const userAnswer = parseInt(answer, 10);
     if (userAnswer == num1 + num2) {

@@ -40,6 +40,7 @@ function App() {
             placeholder="?"
           />
         </label>
+        <button type="submit">Submit</button>
       </form>
       <p>Streak: {streak}</p>
     </>

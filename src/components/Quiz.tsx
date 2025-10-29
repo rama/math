@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { Configuration } from "../types";
 
-function Quiz({ config }) {
+interface QuizProps {
+  config: Configuration;
+}
+
+function Quiz({ config }: QuizProps) {
   const generateNumbers = () => {
     const n1 = Math.floor(Math.random() * maxNumber);
     const n2 = Math.floor(Math.random() * maxNumber);

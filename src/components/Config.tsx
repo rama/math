@@ -1,8 +1,12 @@
 import { useState } from "react";
 
-import { Operation, MaxNumber } from "../types";
+import { Operation, MaxNumber, Configuration } from "../types";
 
-function Config({ onStart }) {
+interface ConfigProps {
+  onStart: (config: Configuration) => void;
+}
+
+function Config({ onStart }: ConfigProps) {
   const [operation, setOperation] = useState<Operation>("+");
   const [maxNumber, setMaxNumber] = useState<MaxNumber>(11);
 

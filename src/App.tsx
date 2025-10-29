@@ -1,48 +1,24 @@
 import { useState } from "react";
 import "./App.css";
+import Config from "./components/Config";
+import Quiz from "./components/Quiz";
 
 function App() {
-  const [answer, setAnswer] = useState("");
-  const [num1, setNum1] = useState(Math.floor(Math.random() * 10));
-  const [num2, setNum2] = useState(Math.floor(Math.random() * 10));
-  const [streak, setStreak] = useState(0);
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value;
-    if (value === "" || /^\d+$/.test(value)) {
-      setAnswer(value);
-    }
-  }
-  const generateNewQuestion = () => {
-    setNum1(Math.floor(Math.random() * 10));
-    setNum2(Math.floor(Math.random() * 10));
-    setAnswer("");
-  };
-  function checkAnswer(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const userAnswer = parseInt(answer, 10);
-    if (userAnswer == num1 + num2) {
-      setStreak(streak + 1);
-    } else {
-      setStreak(0);
-    }
-    generateNewQuestion();
-  }
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [config, setConfig] = useState({ operation: "+", maxNumber: 10 });
   return (
     <>
       <h1>Fact Attack</h1>
-      <form className="card" onSubmit={checkAnswer}>
-        <label>
-          {num1} + {num2} ={" "}
-          <input
-            inputMode="numeric"
-            value={answer}
-            onChange={handleChange}
-            placeholder="?"
-          />
-        </label>
-        <button type="submit">Submit</button>
-      </form>
-      <p>Streak: {streak}</p>
+      {quizStarted ? (
+        <Quiz config={config} />
+      ) : (
+        <Config
+          onStart={(selectedConfig) => {
+            setConfig(selectedConfig);
+            setQuizStarted(true);
+          }}
+        />
+      )}
     </>
   );
 }

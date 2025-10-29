@@ -52,10 +52,33 @@ h1 {
     font-size: 2rem;
     background-color: white;
 }
+form {
+    max-width: 30ch;
+}
 input {
     font-size: 2rem;
     width: 3ch;
     padding: 4px;
+}
+input[type="radio"] {
+    display: none;
+}
+label.button {
+    border: 1px solid hsl(195 25% 75% / 1);
+    border-radius: 8px;
+    margin: 0 3px;
+    width: auto;
+    padding: 5px;
+    font-size: 1.5rem;
+    transition: box-shadow 0.3s cubic-bezier(0.4, 0, 1, 1);
+}
+label.button:hover {
+    box-shadow: 0 0 5px hsl(195 25% 55% / 1);
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1);
+    cursor: pointer;
+}
+label.button.selected {
+    background-color: hsl(195 25% 75% / 1);
 }
 /*.ninja-star {
     display: inline-block;

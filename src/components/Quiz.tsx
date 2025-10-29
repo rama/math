@@ -1,39 +1,50 @@
 import { useState } from "react";
 
 function Quiz({ config }) {
+  const generateNumbers = () => {
+    const n1 = Math.floor(Math.random() * maxNumber);
+    const n2 = Math.floor(Math.random() * maxNumber);
+
+    if (operation === "-" && n1 < n2) {
+      return [n2, n1];
+    }
+
+    return [n1, n2];
+  };
+
   const { operation, maxNumber } = config;
   const [answer, setAnswer] = useState("");
-  const [num1, setNum1] = useState(Math.floor(Math.random() * maxNumber));
-  const [num2, setNum2] = useState(Math.floor(Math.random() * maxNumber));
+  const [operands, setOperands] = useState(() => generateNumbers());
   const [streak, setStreak] = useState(0);
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+
+  const generateNewQuestion = () => {
+    setOperands(generateNumbers());
+    setAnswer("");
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (value === "" || /^\d+$/.test(value)) {
       setAnswer(value);
     }
-  }
-  const generateNewQuestion = () => {
-    setNum1(Math.floor(Math.random() * maxNumber));
-    setNum2(Math.floor(Math.random() * maxNumber));
-    setAnswer("");
   };
-  function checkAnswer(e: React.FormEvent<HTMLFormElement>) {
+
+  const checkAnswer = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userAnswer = Number(answer);
     let correctAnswer;
-
     switch (operation) {
       case "+":
-        correctAnswer = num1 + num2;
+        correctAnswer = operands[0] + operands[1];
         break;
       case "-":
-        correctAnswer = num1 - num2;
+        correctAnswer = operands[0] - operands[1];
         break;
       case "x":
-        correctAnswer = num1 * num2;
+        correctAnswer = operands[0] * operands[1];
         break;
       case "/":
-        correctAnswer = num1 / num2;
+        correctAnswer = operands[0] / operands[1];
         break;
     }
 
@@ -43,12 +54,13 @@ function Quiz({ config }) {
       setStreak(0);
     }
     generateNewQuestion();
-  }
+  };
+
   return (
     <>
       <form className="card" onSubmit={checkAnswer}>
         <label>
-          {num1} {operation} {num2} ={" "}
+          {operands[0]} {operation} {operands[1]} ={" "}
           <input
             inputMode="numeric"
             value={answer}
